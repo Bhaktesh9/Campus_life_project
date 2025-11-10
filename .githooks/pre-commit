@@ -1,0 +1,40 @@
+#!/bin/sh
+# Pre-commit hook: allow commits only for files under an allowlist
+# To enable: run `git config core.hooksPath .githooks` in the repo root.
+
+set -e
+
+# Allowed path prefixes (files or directories)
+ALLOWED="index.html css/ js/ package.json README.md Assets/ screenshots/ package-lock.json LICENSE .gitignore"
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -z "$staged_files" ]; then
+  # nothing staged
+  exit 0
+fi
+
+bad=0
+for f in $staged_files; do
+  ok=0
+  for a in $ALLOWED; do
+    case "$f" in
+      "$a"* ) ok=1; break ;;
+    esac
+  done
+  if [ "$ok" -ne 1 ]; then
+    echo "[pre-commit] Blocked: '$f' is not in the allowed paths list."
+    bad=1
+  fi
+done
+
+if [ "$bad" -eq 1 ]; then
+  echo ""
+  echo "Commit aborted by pre-commit hook. Only changes to the project's important paths may be committed." >&2
+  echo "Allowed paths: $ALLOWED" >&2
+  echo "To commit only allowed files: use 'git add <allowed-file>' and unstage others with 'git reset <file>'" >&2
+  echo "To bypass hooks (not recommended): git commit --no-verify" >&2
+  exit 1
+fi
+
+exit 0
