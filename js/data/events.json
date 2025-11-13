@@ -1,0 +1,7 @@
+{
+  "events": [
+    {"id":"e1","title":"Welcome Week Mixer","date":"2025-11-15","location":"Student Centre","description":"Meet clubs and fellow students."},
+    {"id":"e2","title":"Career Fair","date":"2025-11-21","location":"Main Hall","description":"Employers, CV clinics and workshops."},
+    {"id":"e3","title":"Hackathon Weekend","date":"2025-12-05","location":"Lab 4","description":"48-hour coding event with prizes."}
+  ]
+}
