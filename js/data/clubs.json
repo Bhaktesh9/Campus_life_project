@@ -1,0 +1,6 @@
+{
+  "clubs": [
+    {"id":"c1","name":"Drama Society","desc":"Performing arts and theatre."},
+    {"id":"c2","name":"Robotics Club","desc":"Build robots and compete."}
+  ]
+}
