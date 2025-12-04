@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Campus Life — Events and Bookings</title>
+  <meta name="description" content="Campus Life web app — events, clubs, room bookings, help-desk queue." />
+  <!-- Use the provided logo as the site favicon (appears in the browser tab) -->
+  <link rel="icon" href="Assets/logo.jpg" type="image/jpeg" sizes="32x32" />
+  <link rel="shortcut icon" href="Assets/logo.jpg" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 id="site-title">Campus Life</h1>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="#/" data-link>Home</a></li>
+        <li><a href="#/events" data-link>Events</a></li>
+        <li><a href="#/bookings" data-link>Bookings</a></li>
+        <li><a href="#/help" data-link>Help Desk</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container layout">
+    <main id="app" tabindex="-1">
+      <!-- Views are rendered here by router -->
+      <section id="view-root"></section>
+    </main>
+
+    <aside class="sidebar" aria-label="Quick actions">
+    <button id="open-calendar" class="btn" aria-haspopup="dialog">Open calendar</button>
+    <div class="search">
+      <label for="search-input" class="visually-hidden">Search events</label>
+      <input id="search-input" type="search" placeholder="Search events" aria-label="Search events" />
+    </div>
+    
+    <!-- Admin panel is injected dynamically when ?admin=1 is present -->
+    </aside>
+  </div>
+
+  <!-- simple footer added: copyright notice -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>&copy; Campus Life</p>
+    </div>
+  </footer>
+
+  <template id="event-card-template">
+    <article class="event-card" tabindex="0">
+      <div class="card-content">
+        <h3 class="event-title"></h3>
+        <p class="event-meta"></p>
+        <p class="event-desc"></p>
+        <div class="event-actions">
+          <button class="btn book-btn">Book room</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <!-- Accessible booking dialog -->
+  <dialog id="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <form method="dialog" id="booking-form">
+      <h2 id="booking-title">Book Event</h2>
+      <p id="booking-event" class="muted"></p>
+      <div class="two-col">
+        <div class="field">
+          <label for="bk-name">Your name <span aria-hidden="true">*</span></label>
+          <input id="bk-name" name="name" required autocomplete="name" class="form-input" />
+        </div>
+        <div class="field">
+          <label for="bk-email">Email (optional)</label>
+          <input id="bk-email" name="email" type="email" autocomplete="email" class="form-input" />
+        </div>
+      </div>
+      <input type="hidden" id="bk-event-id" name="eventId" />
+      <menu class="dialog-actions">
+        <button id="bk-cancel" type="reset" class="btn secondary">Cancel</button>
+        <button id="bk-submit" type="submit" class="btn" disabled>Confirm booking</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- Confirmation dialog shown after booking -->
+  <dialog id="booking-confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-title" class="confirm-dialog">
+    <div class="confirm-inner">
+      <div class="confirm-check">&#10003;</div>
+      <h2 id="confirm-title">Booking confirmed</h2>
+      <p id="confirm-desc" class="muted"></p>
+      <div style="display:flex;gap:0.5rem;justify-content:flex-end;margin-top:0.75rem">
+        <button id="confirm-close" class="btn">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/main.js"></script>
+  <!-- Toast/ARIA-live regions -->
+  <div id="toast-wrap" aria-hidden="true">
+    <div id="toast-container-polite" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="toast-container-assertive" class="toast-container" role="alert" aria-live="assertive" aria-atomic="true"></div>
+  </div>
+</body>
+</html>

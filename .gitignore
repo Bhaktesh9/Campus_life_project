@@ -1,0 +1,52 @@
+# Node
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Build / output
+dist/
+coverage/
+.evidence/
+.evidence/
+.evidence
+.evidence/*
+
+# Local env
+.env
+.env.*
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+
+# Test artifacts
+coverage/
+lcov-report/
+
+# Images/large assets (keep only source images committed if you want)
+# Uncomment if you want generated images out
+# public/images/optimized/
+
+# Misc
+*.sqlite
+*.db
+
+# Evidence and personal screenshots (don't commit large evidence files)
+evidence/
+
+# Ignore dist bundles by default
+dist/
+
+# Ignore local dev-only files
+local-*.*
